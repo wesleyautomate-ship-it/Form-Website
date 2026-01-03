@@ -16,35 +16,30 @@ const BookingForm: React.FC = () => {
     setIsSubmitting(true);
     setError(null);
 
-    // INSTRUCTIONS: 
-    // 1. Go to https://formspree.io/ and create a free account.
-    // 2. Create a new form and link it to formconvert@gmail.com.
-    // 3. Replace 'YOUR_FORMSPREE_ID' below with the ID provided by Formspree.
-    const FORMSPREE_ENDPOINT = "https://formspree.io/f/formconvert@gmail.com"; 
-
     try {
-      const response = await fetch(FORMSPREE_ENDPOINT, {
-        method: "POST",
+      const response = await fetch('/.netlify/functions/submit-form', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json"
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.notes,
+        }),
       });
+
+      const data = await response.json();
 
       if (response.ok) {
         setSubmitted(true);
         setFormData({ name: '', email: '', notes: '' });
       } else {
-        const data = await response.json();
-        if (data.errors) {
-          setError(data.errors.map((error: any) => error.message).join(", "));
-        } else {
-          setError("Something went wrong. Please try again later.");
-        }
+        setError(data.error || 'Something went wrong. Please try again later.');
       }
     } catch (err) {
-      setError("Unable to connect to the server. Please check your internet connection.");
+      console.error('Submission error:', err);
+      setError('Unable to submit form. Please check your connection and try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -62,7 +57,7 @@ const BookingForm: React.FC = () => {
         <p className="text-gray-600 mb-8 leading-relaxed max-w-md mx-auto">
           Your brand vision has been successfully delivered. Our team will review the details and initiate a dialogue within 24 hours.
         </p>
-        <button 
+        <button
           onClick={() => setSubmitted(false)}
           className="text-[10px] uppercase tracking-[0.4em] font-bold text-black border-b border-black pb-1 hover:opacity-50 transition-opacity"
         >
@@ -75,7 +70,7 @@ const BookingForm: React.FC = () => {
   return (
     <form onSubmit={handleSubmit} className="bg-white p-8 md:p-16 rounded-lg shadow-2xl relative">
       <h3 className="text-4xl mb-10 serif italic text-black">Initiate Strategy</h3>
-      
+
       {error && (
         <div className="mb-8 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 text-xs uppercase tracking-widest font-bold">
           {error}
@@ -85,35 +80,35 @@ const BookingForm: React.FC = () => {
       <div className="grid md:grid-cols-2 gap-8 mb-8">
         <div>
           <label className="block text-[10px] uppercase tracking-widest mb-3 font-bold text-black opacity-60">Full Name</label>
-          <input 
-            type="text" 
+          <input
+            type="text"
             name="name"
             required
             placeholder="Jane Doe"
             disabled={isSubmitting}
             className="w-full bg-[#f8f8f8] text-black border-b border-black/20 py-4 px-4 outline-none focus:bg-white focus:border-black transition-all text-sm placeholder:text-black/30 font-medium disabled:opacity-50"
             value={formData.name}
-            onChange={(e) => setFormData({...formData, name: e.target.value})}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
           />
         </div>
         <div>
           <label className="block text-[10px] uppercase tracking-widest mb-3 font-bold text-black opacity-60">Email Address</label>
-          <input 
-            type="email" 
+          <input
+            type="email"
             name="email"
             required
             placeholder="jane@brand.com"
             disabled={isSubmitting}
             className="w-full bg-[#f8f8f8] text-black border-b border-black/20 py-4 px-4 outline-none focus:bg-white focus:border-black transition-all text-sm placeholder:text-black/30 font-medium disabled:opacity-50"
             value={formData.email}
-            onChange={(e) => setFormData({...formData, email: e.target.value})}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
           />
         </div>
       </div>
 
       <div className="mb-12">
         <label className="block text-[10px] uppercase tracking-widest mb-3 font-bold text-black opacity-60">The Vision (Tell us about your brand)</label>
-        <textarea 
+        <textarea
           name="message"
           rows={3}
           required
@@ -121,16 +116,15 @@ const BookingForm: React.FC = () => {
           placeholder="What is the legacy you wish to build?"
           className="w-full bg-[#f8f8f8] text-black border-b border-black/20 py-4 px-4 outline-none focus:bg-white focus:border-black transition-all text-sm placeholder:italic placeholder:text-black/30 font-medium disabled:opacity-50"
           value={formData.notes}
-          onChange={(e) => setFormData({...formData, notes: e.target.value})}
+          onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
         />
       </div>
 
-      <button 
+      <button
         type="submit"
         disabled={isSubmitting}
-        className={`w-full bg-black text-white py-5 rounded-full font-bold uppercase tracking-[0.3em] text-[11px] transition-all duration-300 shadow-xl flex items-center justify-center gap-3 ${
-          isSubmitting ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-800 hover:scale-[1.02] active:scale-95'
-        }`}
+        className={`w-full bg-black text-white py-5 rounded-full font-bold uppercase tracking-[0.3em] text-[11px] transition-all duration-300 shadow-xl flex items-center justify-center gap-3 ${isSubmitting ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-800 hover:scale-[1.02] active:scale-95'
+          }`}
       >
         {isSubmitting ? (
           <>

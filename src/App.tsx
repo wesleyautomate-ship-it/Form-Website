@@ -46,7 +46,6 @@ const Header: React.FC = () => (
       <nav className="hidden md:flex space-x-8 text-white uppercase tracking-[0.2em] text-[10px] font-bold">
         <Link to="/" className="hover:text-gray-300 transition-colors">HOME</Link>
         <Link to="/about" className="hover:text-gray-300 transition-colors">ABOUT US</Link>
-        <Link to="/#portfolio" className="hover:text-gray-300 transition-colors">PORTFOLIO</Link>
         <Link to="/case-studies" className="hover:text-gray-300 transition-colors">CASE STUDY</Link>
       </nav>
       <Link
