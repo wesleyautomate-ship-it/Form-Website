@@ -26,6 +26,12 @@ export interface CaseStudy {
   videoUrls?: string[];
 }
 
+export interface BusinessPillar {
+  title: string;
+  tagline: string;
+  image: string;
+}
+
 export interface TeamMember {
   name: string;
   role: string;

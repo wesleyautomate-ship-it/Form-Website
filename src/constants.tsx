@@ -1,5 +1,28 @@
 
-import { ServiceItem, PricingTier, TeamMember, CaseStudy } from './types';
+import { ServiceItem, PricingTier, TeamMember, CaseStudy, BusinessPillar } from './types';
+
+export const PILLARS: BusinessPillar[] = [
+  {
+    title: "Brand Environments",
+    tagline: "Atmosphere as strategy.",
+    image: "/src/assets/enviroment.jpeg"
+  },
+  {
+    title: "Lifestyle & Culture",
+    tagline: "Brands live where people move.",
+    image: "/src/assets/lifestyle.jpeg"
+  },
+  {
+    title: "Product & Detail",
+    tagline: "Designed objects, placed with intention.",
+    image: "/src/assets/product-detail.jpeg"
+  },
+  {
+    title: "Wellness & Movement",
+    tagline: "Modern wellness as a brand language.",
+    image: "/src/assets/wellness-photo.jpeg"
+  }
+];
 
 export const CASE_STUDIES: CaseStudy[] = [
   {

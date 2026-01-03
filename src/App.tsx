@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { GoogleGenAI } from "@google/genai";
-import { SERVICES, PRICING, TEAM, CASE_STUDIES } from './constants';
+import { SERVICES, PRICING, TEAM, CASE_STUDIES, PILLARS } from './constants';
 import AIAssistant from './components/AIAssistant';
 import BookingForm from './components/BookingForm';
 import HeroImage from './assets/hero-1.jpeg';
@@ -46,6 +46,7 @@ const Header: React.FC = () => (
       <nav className="hidden md:flex space-x-8 text-white uppercase tracking-[0.2em] text-[10px] font-bold">
         <Link to="/" className="hover:text-gray-300 transition-colors">HOME</Link>
         <Link to="/about" className="hover:text-gray-300 transition-colors">ABOUT US</Link>
+        <Link to="/#portfolio" className="hover:text-gray-300 transition-colors">PORTFOLIO</Link>
         <Link to="/case-studies" className="hover:text-gray-300 transition-colors">CASE STUDY</Link>
       </nav>
       <Link
@@ -176,20 +177,20 @@ const PortfolioSection: React.FC = () => (
     <div className="max-w-7xl mx-auto">
       <div className="flex flex-col md:flex-row justify-between items-end mb-16">
         <div>
-          <span className="uppercase tracking-[0.4em] text-[10px] font-bold text-[#4a0000] mb-4 block">Selected Worlds</span>
-          <h2 className="text-5xl md:text-6xl serif italic">The Portfolio</h2>
+          <span className="uppercase tracking-[0.4em] text-[10px] font-bold text-[#4a0000] mb-4 block">Our Clients</span>
+          <h2 className="text-5xl md:text-6xl serif italic">Selected Worlds</h2>
         </div>
-        <Link to="/case-studies" className="text-[10px] font-bold uppercase tracking-[0.3em] border-b-2 border-black pb-1 hover:opacity-60 transition-opacity mt-8 md:mt-0">View Full Case Studies</Link>
+        <Link to="/case-studies" className="bg-[#4a0000] text-white px-8 py-3 text-[10px] font-bold uppercase tracking-[0.3em] transition-all hover:scale-105 shadow-lg mt-8 md:mt-0">View Full Case Studies</Link>
       </div>
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {CASE_STUDIES.map((item, idx) => (
-          <Link to="/case-studies" key={idx} className="group cursor-pointer">
+        {PILLARS.map((pillar, idx) => (
+          <div key={idx} className="group">
             <div className="aspect-[4/5] overflow-hidden mb-6 bg-gray-100 grayscale hover:grayscale-0 transition-all duration-700">
-              <img src={item.images[0]} alt={item.category} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+              <img src={pillar.image} alt={pillar.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
             </div>
-            <h4 className="text-xs uppercase tracking-widest font-bold mb-1">{item.category}</h4>
-            <p className="text-[10px] uppercase tracking-widest text-[#4a0000] font-medium opacity-60 italic">{item.brands.split('·')[0]}</p>
-          </Link>
+            <h4 className="text-xs uppercase tracking-widest font-bold mb-1">{pillar.title}</h4>
+            <p className="text-[10px] uppercase tracking-widest text-[#4a0000] font-medium opacity-60 italic">{pillar.tagline}</p>
+          </div>
         ))}
       </div>
     </div>
