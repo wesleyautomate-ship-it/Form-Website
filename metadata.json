@@ -1,0 +1,8 @@
+{
+  "name": "FORM.",
+  "description": "A premium digital marketing agency specializing in brand identity, strategic positioning, and digital commerce for wellness and lifestyle brands.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
