@@ -17,7 +17,7 @@ const BookingForm: React.FC = () => {
     setError(null);
 
     try {
-      const response = await fetch('/.netlify/functions/submit-form', {
+      const response = await fetch('/api/submit-form', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

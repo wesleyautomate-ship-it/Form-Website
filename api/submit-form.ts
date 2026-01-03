@@ -1,4 +1,4 @@
-import { Handler } from '@netlify/functions';
+import { VercelRequest, VercelResponse } from '@vercel/node';
 import { createClient } from '@supabase/supabase-js';
 import { Resend } from 'resend';
 
@@ -17,26 +17,21 @@ interface FormData {
     message: string;
 }
 
-export const handler: Handler = async (event) => {
+export default async function handler(
+    req: VercelRequest,
+    res: VercelResponse
+) {
     // Only allow POST requests
-    if (event.httpMethod !== 'POST') {
-        return {
-            statusCode: 405,
-            body: JSON.stringify({ error: 'Method not allowed' }),
-        };
+    if (req.method !== 'POST') {
+        return res.status(405).json({ error: 'Method not allowed' });
     }
 
     try {
-        // Parse form data
-        const formData: FormData = JSON.parse(event.body || '{}');
-        const { name, email, message } = formData;
+        const { name, email, message } = req.body as FormData;
 
         // Validate required fields
         if (!name || !email || !message) {
-            return {
-                statusCode: 400,
-                body: JSON.stringify({ error: 'Missing required fields' }),
-            };
+            return res.status(400).json({ error: 'Missing required fields' });
         }
 
         // Save to Supabase
@@ -60,7 +55,7 @@ export const handler: Handler = async (event) => {
         }
 
         // Send admin notification email
-        const adminEmailResult = await resend.emails.send({
+        await resend.emails.send({
             from: 'FORM Creative <onboarding@resend.dev>',
             to: adminEmail,
             subject: `🔥 New Lead: ${name}`,
@@ -82,14 +77,14 @@ export const handler: Handler = async (event) => {
           </div>
 
           <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd;">
-            <p style="color: #666; font-size: 12px;">View in Supabase: <a href="${supabaseUrl}">Dashboard</a></p>
+            <p style="color: #666; font-size: 12px;">View in Supabase Dashbord</p>
           </div>
         </div>
       `,
         });
 
         // Send auto-response to client
-        const clientEmailResult = await resend.emails.send({
+        await resend.emails.send({
             from: 'FORM Creative <onboarding@resend.dev>',
             to: email,
             subject: 'Thank you for your inquiry',
@@ -128,24 +123,16 @@ export const handler: Handler = async (event) => {
       `,
         });
 
-        console.log('Emails sent:', { adminEmailResult, clientEmailResult });
-
-        return {
-            statusCode: 200,
-            body: JSON.stringify({
-                success: true,
-                message: 'Form submitted successfully',
-                leadId: lead.id,
-            }),
-        };
+        return res.status(200).json({
+            success: true,
+            message: 'Form submitted successfully',
+            leadId: lead.id,
+        });
     } catch (error) {
         console.error('Function error:', error);
-        return {
-            statusCode: 500,
-            body: JSON.stringify({
-                error: 'Failed to process form submission',
-                details: error instanceof Error ? error.message : 'Unknown error',
-            }),
-        };
+        return res.status(500).json({
+            error: 'Failed to process form submission',
+            details: error instanceof Error ? error.message : 'Unknown error',
+        });
     }
-};
+}
