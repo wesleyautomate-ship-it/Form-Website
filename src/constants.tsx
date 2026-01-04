@@ -45,8 +45,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     category: "Fitness Studio / Movement",
     brands: "Studio 14 — Dubai",
     images: [
-      "/assets/Fitness Studio _ Movement photo 1 .jpg",
-      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800"
+      "/assets/Fitness Studio _ Movement photo 1 .jpg"
     ],
     context: "The studio sought to strengthen community, visibility, and brand alignment beyond traditional fitness marketing.",
     role: "FORM acted as both strategist and brand ambassador — creating content, attending events, and intentionally bringing aligned women into the ecosystem.",
