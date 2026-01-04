@@ -58,8 +58,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     category: "Community Product / Cause-Driven",
     brands: "The Paw Collection — Las Vegas · Albuquerque · Dubai",
     images: [
-      "/assets/Community Product _ Cause-Driven.jpg",
-      "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&q=80&w=800"
+      "/assets/Community Product _ Cause-Driven.jpg"
     ],
     context: "The Paw Collection was built as a community-first brand blending product, lifestyle, and purpose.",
     role: "FORM founded and led every aspect — from strategy and systems to community activation and conversion-focused marketing.",
