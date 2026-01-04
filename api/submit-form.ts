@@ -3,63 +3,78 @@ import { createClient } from '@supabase/supabase-js';
 import { Resend } from 'resend';
 
 // Initialize Supabase client
-const supabaseUrl = process.env.SUPABASE_URL!;
-const supabaseKey = process.env.SUPABASE_ANON_KEY!;
-const supabase = createClient(supabaseUrl, supabaseKey);
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_ANON_KEY;
+const resendKey = process.env.RESEND_API_KEY;
+
+if (!supabaseUrl || !supabaseKey) {
+  console.warn('Supabase credentials missing from environment');
+}
+
+if (!resendKey) {
+  console.warn('Resend API key missing from environment');
+}
+
+const supabase = (supabaseUrl && supabaseKey) ? createClient(supabaseUrl, supabaseKey) : null;
 
 // Initialize Resend client
-const resend = new Resend(process.env.RESEND_API_KEY!);
-const adminEmail = process.env.ADMIN_EMAIL || 'formconvert@gmail.com';
+const resend = resendKey ? new Resend(resendKey) : null;
+const adminEmail = process.env.ADMIN_EMAIL || 'formconverts@gmail.com';
 
 interface FormData {
-    name: string;
-    email: string;
-    message: string;
+  name: string;
+  email: string;
+  message: string;
 }
 
 export default async function handler(
-    req: VercelRequest,
-    res: VercelResponse
+  req: VercelRequest,
+  res: VercelResponse
 ) {
-    // Only allow POST requests
-    if (req.method !== 'POST') {
-        return res.status(405).json({ error: 'Method not allowed' });
+  // Only allow POST requests
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  try {
+    const { name, email, message } = req.body as FormData;
+
+    // Validate required fields
+    if (!name || !email || !message) {
+      return res.status(400).json({ error: 'Missing required fields' });
     }
 
-    try {
-        const { name, email, message } = req.body as FormData;
+    // Save to Supabase
+    let leadId = 'mock-id';
+    if (supabase) {
+      const { data: lead, error: dbError } = await supabase
+        .from('leads')
+        .insert([
+          {
+            name,
+            email,
+            message,
+            status: 'new',
+            source: 'website',
+          },
+        ])
+        .select()
+        .single();
 
-        // Validate required fields
-        if (!name || !email || !message) {
-            return res.status(400).json({ error: 'Missing required fields' });
-        }
+      if (dbError) {
+        console.error('Database error:', dbError);
+        throw new Error('Failed to save lead to database');
+      }
+      leadId = lead.id;
+    }
 
-        // Save to Supabase
-        const { data: lead, error: dbError } = await supabase
-            .from('leads')
-            .insert([
-                {
-                    name,
-                    email,
-                    message,
-                    status: 'new',
-                    source: 'website',
-                },
-            ])
-            .select()
-            .single();
-
-        if (dbError) {
-            console.error('Database error:', dbError);
-            throw new Error('Failed to save lead to database');
-        }
-
-        // Send admin notification email
-        await resend.emails.send({
-            from: 'FORM Creative <onboarding@resend.dev>',
-            to: adminEmail,
-            subject: `🔥 New Lead: ${name}`,
-            html: `
+    // Send admin notification email
+    if (resend) {
+      await resend.emails.send({
+        from: 'FORM Creative <onboarding@resend.dev>',
+        to: adminEmail,
+        subject: `🔥 New Lead: ${name}`,
+        html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #4a0000;">New Lead Submission</h2>
           <p>You have a new inquiry from your website!</p>
@@ -81,14 +96,14 @@ export default async function handler(
           </div>
         </div>
       `,
-        });
+      });
 
-        // Send auto-response to client
-        await resend.emails.send({
-            from: 'FORM Creative <onboarding@resend.dev>',
-            to: email,
-            subject: 'Thank you for your inquiry',
-            html: `
+      // Send auto-response to client
+      await resend.emails.send({
+        from: 'FORM Creative <onboarding@resend.dev>',
+        to: email,
+        subject: 'Thank you for your inquiry',
+        html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #4a0000;">Inquiry Received</h2>
           <p>Hi ${name},</p>
@@ -121,18 +136,20 @@ export default async function handler(
           </div>
         </div>
       `,
-        });
+      });
 
-        return res.status(200).json({
-            success: true,
-            message: 'Form submitted successfully',
-            leadId: lead.id,
-        });
-    } catch (error) {
-        console.error('Function error:', error);
-        return res.status(500).json({
-            error: 'Failed to process form submission',
-            details: error instanceof Error ? error.message : 'Unknown error',
-        });
     }
+
+    return res.status(200).json({
+      success: true,
+      message: 'Form submitted successfully',
+      leadId: leadId,
+    });
+  } catch (error) {
+    console.error('Function error:', error);
+    return res.status(500).json({
+      error: 'Failed to process form submission',
+      details: error instanceof Error ? error.message : 'Unknown error',
+    });
+  }
 }

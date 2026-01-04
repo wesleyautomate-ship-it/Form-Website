@@ -405,7 +405,7 @@ const AboutPage: React.FC = () => {
           </div>
           <div className="relative">
             <div className="aspect-[16/10] bg-white/5 p-1 overflow-hidden shadow-2xl">
-              <img src="about_visual.jpg" alt="FORM Aesthetic" className="w-full h-full object-cover opacity-90" />
+              <img src="/src/assets/ethos.png" alt="FORM Aesthetic" className="w-full h-full object-cover opacity-90" />
             </div>
             <div className="absolute -bottom-12 -left-12 bg-white text-black p-10 shadow-2xl hidden md:block max-w-xs">
               <p className="text-[10px] font-bold uppercase tracking-[0.3em] mb-4">Our Metric</p>
@@ -494,7 +494,7 @@ const Footer: React.FC = () => (
         <div>
           <h4 className="uppercase tracking-[0.4em] text-[10px] font-bold mb-8 text-[#cc3333]">Contact</h4>
           <ul className="space-y-4 text-xs uppercase tracking-widest text-gray-400">
-            <li>formconvert@gmail.com</li>
+            <li>formconverts@gmail.com</li>
             <li className="leading-relaxed">Dubai · Albuquerque · Las Vegas · Seattle</li>
             <li className="pt-2 opacity-60 tabular-nums">+1 505 850 3372</li>
             <li className="opacity-60 tabular-nums">+971 58 528 6636</li>

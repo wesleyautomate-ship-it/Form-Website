@@ -29,7 +29,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     category: "Luxury Wellness / Beauty",
     brands: "Luxury Wellness Brand — Dubai · Boutique Spa Experience — Santa Fe",
     images: [
-      "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=800"
+      "/src/assets/Luxury Wellness _ Beauty photo 1 (1).jpg"
     ],
     videoUrls: [
       "https://www.instagram.com/s/aGlnaGxpZ2h0OjE3OTYyOTc3MTI1OTY5NDkz?story_media_id=3722166529983960649&igsh=dzV4eGJleXNyNndr",
@@ -45,7 +45,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     category: "Fitness Studio / Movement",
     brands: "Studio 14 — Dubai",
     images: [
-      "https://images.unsplash.com/photo-1518611012118-29a8d63ee0c2?auto=format&fit=crop&q=80&w=800",
+      "/src/assets/Fitness Studio _ Movement photo 1 .jpg",
       "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800"
     ],
     context: "The studio sought to strengthen community, visibility, and brand alignment beyond traditional fitness marketing.",
@@ -58,7 +58,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     category: "Community Product / Cause-Driven",
     brands: "The Paw Collection — Las Vegas · Albuquerque · Dubai",
     images: [
-      "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&q=80&w=800",
+      "/src/assets/Community Product _ Cause-Driven.jpg",
       "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&q=80&w=800"
     ],
     context: "The Paw Collection was built as a community-first brand blending product, lifestyle, and purpose.",
@@ -71,8 +71,8 @@ export const CASE_STUDIES: CaseStudy[] = [
     category: "Personal Brand / Mindset / Education",
     brands: "Gamma x Rhythm — Seattle · Las Vegas",
     images: [
-      "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&q=80&w=800",
-      "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800"
+      "/src/assets/gamma-1.png",
+      "/src/assets/gamma-2.jpeg"
     ],
     context: "Gamma x Rhythm required structure, clarity, and positioning to translate mindset education into a scalable brand.",
     role: "FORM built the brand architecture — shaping content, systems, and messaging to support education, conversion, and longevity.",

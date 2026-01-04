@@ -29,17 +29,25 @@ const BookingForm: React.FC = () => {
         }),
       });
 
-      const data = await response.json();
+      let data;
+      const contentType = response.headers.get('content-type');
+      if (contentType && contentType.includes('application/json')) {
+        data = await response.json();
+      } else {
+        const text = await response.text();
+        console.error('Non-JSON response:', text);
+        throw new Error(`Server returned ${response.status}: ${response.statusText}`);
+      }
 
       if (response.ok) {
         setSubmitted(true);
         setFormData({ name: '', email: '', notes: '' });
       } else {
-        setError(data.error || 'Something went wrong. Please try again later.');
+        setError(data.error || `Submission failed with status ${response.status}`);
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error('Submission error:', err);
-      setError('Unable to submit form. Please check your connection and try again.');
+      setError(err.message || 'Unable to submit form. Please check your connection and try again.');
     } finally {
       setIsSubmitting(false);
     }
