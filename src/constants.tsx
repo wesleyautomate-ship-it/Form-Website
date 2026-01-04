@@ -71,7 +71,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     category: "Personal Brand / Mindset / Education",
     brands: "Gamma x Rhythm — Seattle · Las Vegas",
     images: [
-      "/assets/gamma-1.png",
+      "/assets/gamma.png",
       "/assets/gamma-2.jpeg"
     ],
     context: "Gamma x Rhythm required structure, clarity, and positioning to translate mindset education into a scalable brand.",
