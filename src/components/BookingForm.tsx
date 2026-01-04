@@ -5,6 +5,8 @@ const BookingForm: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
+    businessName: '',
     notes: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -25,6 +27,8 @@ const BookingForm: React.FC = () => {
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
+          phone: formData.phone,
+          businessName: formData.businessName,
           message: formData.notes,
         }),
       });
@@ -41,7 +45,7 @@ const BookingForm: React.FC = () => {
 
       if (response.ok) {
         setSubmitted(true);
-        setFormData({ name: '', email: '', notes: '' });
+        setFormData({ name: '', email: '', phone: '', businessName: '', notes: '' });
       } else {
         setError(data.error || `Submission failed with status ${response.status}`);
       }
@@ -112,6 +116,32 @@ const BookingForm: React.FC = () => {
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
           />
         </div>
+        <div>
+          <label className="block text-[10px] uppercase tracking-widest mb-3 font-bold text-black opacity-60">Business Name</label>
+          <input
+            type="text"
+            name="businessName"
+            required
+            placeholder="Brand Name"
+            disabled={isSubmitting}
+            className="w-full bg-[#f8f8f8] text-black border-b border-black/20 py-4 px-4 outline-none focus:bg-white focus:border-black transition-all text-sm placeholder:text-black/30 font-medium disabled:opacity-50"
+            value={formData.businessName}
+            onChange={(e) => setFormData({ ...formData, businessName: e.target.value })}
+          />
+        </div>
+        <div>
+          <label className="block text-[10px] uppercase tracking-widest mb-3 font-bold text-black opacity-60">Phone Number</label>
+          <input
+            type="tel"
+            name="phone"
+            required
+            placeholder="+1 (555) 000-0000"
+            disabled={isSubmitting}
+            className="w-full bg-[#f8f8f8] text-black border-b border-black/20 py-4 px-4 outline-none focus:bg-white focus:border-black transition-all text-sm placeholder:text-black/30 font-medium disabled:opacity-50"
+            value={formData.phone}
+            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+          />
+        </div>
       </div>
 
       <div className="mb-12">
@@ -144,6 +174,7 @@ const BookingForm: React.FC = () => {
           </>
         ) : "Submit Inquiry"}
       </button>
+
 
       <p className="mt-6 text-[9px] text-center text-gray-400 uppercase tracking-widest font-medium">
         Secure transmission via FORM Creative growth systems.

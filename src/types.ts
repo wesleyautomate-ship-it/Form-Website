@@ -46,3 +46,14 @@ export interface Testimonial {
   quote: string;
   image?: string;
 }
+export interface Lead {
+  id?: string;
+  name: string;
+  email: string;
+  phone: string;
+  businessName: string;
+  notes: string;
+  status?: string;
+  source?: string;
+  createdAt?: string;
+}

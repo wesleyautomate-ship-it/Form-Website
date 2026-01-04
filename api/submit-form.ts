@@ -24,6 +24,8 @@ const adminEmail = process.env.ADMIN_EMAIL || 'formconverts@gmail.com';
 interface FormData {
   name: string;
   email: string;
+  phone: string;
+  businessName: string;
   message: string;
 }
 
@@ -37,10 +39,10 @@ export default async function handler(
   }
 
   try {
-    const { name, email, message } = req.body as FormData;
+    const { name, email, phone, businessName, message } = req.body as FormData;
 
     // Validate required fields
-    if (!name || !email || !message) {
+    if (!name || !email || !phone || !businessName || !message) {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
@@ -53,6 +55,8 @@ export default async function handler(
           {
             name,
             email,
+            phone,
+            business_name: businessName,
             message,
             status: 'new',
             source: 'website',
@@ -73,7 +77,7 @@ export default async function handler(
       await resend.emails.send({
         from: 'FORM Creative <onboarding@resend.dev>',
         to: adminEmail,
-        subject: `🔥 New Lead: ${name}`,
+        subject: `🔥 New Lead: ${name} (${businessName})`,
         html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #4a0000;">New Lead Submission</h2>
@@ -83,6 +87,8 @@ export default async function handler(
             <h3 style="margin-top: 0;">Contact Details</h3>
             <p><strong>Name:</strong> ${name}</p>
             <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
+            <p><strong>Phone:</strong> ${phone}</p>
+            <p><strong>Business Name:</strong> ${businessName}</p>
             <p><strong>Submitted:</strong> ${new Date().toLocaleString()}</p>
           </div>
 
@@ -108,9 +114,9 @@ export default async function handler(
           <h2 style="color: #4a0000;">Inquiry Received</h2>
           <p>Hi ${name},</p>
           
-          <p>Thank you for reaching out to FORM Creative Growth Studio.</p>
+          <p>Thank you for reaching out to FORM Creative Growth Studio regarding <strong>${businessName}</strong>.</p>
           
-          <p>We've received your inquiry and our team will review the details. We typically respond within 24 hours to discuss how we can help elevate your brand.</p>
+          <p>We've received your inquiry and our team will review the details. We typically respond within 24 hours to the phone number (${phone}) or email provided to discuss how we can help elevate your brand.</p>
 
           <div style="background: #f8f8f8; padding: 20px; border-radius: 8px; margin: 30px 0;">
             <h3 style="margin-top: 0;">What happens next?</h3>
@@ -139,6 +145,7 @@ export default async function handler(
       });
 
     }
+
 
     return res.status(200).json({
       success: true,

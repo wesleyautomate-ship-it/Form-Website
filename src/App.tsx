@@ -5,8 +5,8 @@ import { GoogleGenAI } from "@google/genai";
 import { SERVICES, PRICING, TEAM, CASE_STUDIES, PILLARS } from './constants';
 import AIAssistant from './components/AIAssistant';
 import BookingForm from './components/BookingForm';
-import HeroImage from './assets/hero-1.jpeg';
-import FounderPhoto from './assets/founder-photo.jpeg';
+const HeroImage = "/assets/hero-1.jpeg";
+const FounderPhoto = "/assets/founder-photo.jpeg";
 
 const ScrollToTop = () => {
   const { pathname, hash } = useLocation();
@@ -405,7 +405,7 @@ const AboutPage: React.FC = () => {
           </div>
           <div className="relative">
             <div className="aspect-[16/10] bg-white/5 p-1 overflow-hidden shadow-2xl">
-              <img src="/src/assets/ethos.png" alt="FORM Aesthetic" className="w-full h-full object-cover opacity-90" />
+              <img src="/assets/ethos.png" alt="FORM Aesthetic" className="w-full h-full object-cover opacity-90" />
             </div>
             <div className="absolute -bottom-12 -left-12 bg-white text-black p-10 shadow-2xl hidden md:block max-w-xs">
               <p className="text-[10px] font-bold uppercase tracking-[0.3em] mb-4">Our Metric</p>

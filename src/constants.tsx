@@ -5,22 +5,22 @@ export const PILLARS: BusinessPillar[] = [
   {
     title: "Brand Environments",
     tagline: "Atmosphere as strategy.",
-    image: "/src/assets/enviroment.jpeg"
+    image: "/assets/enviroment.jpeg"
   },
   {
     title: "Lifestyle & Culture",
     tagline: "Brands live where people move.",
-    image: "/src/assets/lifestyle.jpeg"
+    image: "/assets/lifestyle.jpeg"
   },
   {
     title: "Product & Detail",
     tagline: "Designed objects, placed with intention.",
-    image: "/src/assets/product-detail.jpeg"
+    image: "/assets/product-detail.jpeg"
   },
   {
     title: "Wellness & Movement",
     tagline: "Modern wellness as a brand language.",
-    image: "/src/assets/wellness-photo.jpeg"
+    image: "/assets/wellness-photo.jpeg"
   }
 ];
 
@@ -29,7 +29,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     category: "Luxury Wellness / Beauty",
     brands: "Luxury Wellness Brand — Dubai · Boutique Spa Experience — Santa Fe",
     images: [
-      "/src/assets/Luxury Wellness _ Beauty photo 1 (1).jpg"
+      "/assets/Luxury Wellness _ Beauty photo 1 (1).jpg"
     ],
     videoUrls: [
       "https://www.instagram.com/s/aGlnaGxpZ2h0OjE3OTYyOTc3MTI1OTY5NDkz?story_media_id=3722166529983960649&igsh=dzV4eGJleXNyNndr",
@@ -45,7 +45,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     category: "Fitness Studio / Movement",
     brands: "Studio 14 — Dubai",
     images: [
-      "/src/assets/Fitness Studio _ Movement photo 1 .jpg",
+      "/assets/Fitness Studio _ Movement photo 1 .jpg",
       "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800"
     ],
     context: "The studio sought to strengthen community, visibility, and brand alignment beyond traditional fitness marketing.",
@@ -58,7 +58,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     category: "Community Product / Cause-Driven",
     brands: "The Paw Collection — Las Vegas · Albuquerque · Dubai",
     images: [
-      "/src/assets/Community Product _ Cause-Driven.jpg",
+      "/assets/Community Product _ Cause-Driven.jpg",
       "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&q=80&w=800"
     ],
     context: "The Paw Collection was built as a community-first brand blending product, lifestyle, and purpose.",
@@ -71,8 +71,8 @@ export const CASE_STUDIES: CaseStudy[] = [
     category: "Personal Brand / Mindset / Education",
     brands: "Gamma x Rhythm — Seattle · Las Vegas",
     images: [
-      "/src/assets/gamma-1.png",
-      "/src/assets/gamma-2.jpeg"
+      "/assets/gamma-1.png",
+      "/assets/gamma-2.jpeg"
     ],
     context: "Gamma x Rhythm required structure, clarity, and positioning to translate mindset education into a scalable brand.",
     role: "FORM built the brand architecture — shaping content, systems, and messaging to support education, conversion, and longevity.",
