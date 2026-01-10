@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { GoogleGenAI } from "@google/genai";
-import { SERVICES, PRICING, TEAM, CASE_STUDIES, PILLARS } from './constants';
+import { SERVICES, PRICING, CASE_STUDIES, PILLARS } from './constants';
 import AIAssistant from './components/AIAssistant';
 import BookingForm from './components/BookingForm';
 const HeroImage = "/assets/hero-1.jpeg";
@@ -138,7 +138,7 @@ const Hero: React.FC = () => {
         ) : (
           <img
             src={HeroImage}
-            alt="background"
+            alt="Luxury wellness brand planning workspace"
             className="w-full h-full object-cover object-center opacity-50 filter grayscale"
           />
         )}
@@ -147,13 +147,19 @@ const Hero: React.FC = () => {
       </div>
 
       <div className="relative z-10 max-w-5xl">
-        <h2 className="text-white uppercase tracking-[0.6em] text-[10px] mb-12 font-bold opacity-70">Aesthetic Precision · Strategic Prescience · Performance</h2>
-        <div className="flex justify-center mb-10">
-          <Logo textSize="text-7xl md:text-9xl" className="px-8 py-5 md:px-14 md:py-8 shadow-2xl hover:scale-105 transition-transform duration-700" />
+        <h2 className="text-white uppercase tracking-[0.6em] text-[9px] md:text-[10px] mb-8 md:mb-10 font-bold opacity-70">Aesthetic Precision · Strategic Prescience · Performance</h2>
+        <div className="flex justify-center mb-8 md:mb-10">
+          <Logo textSize="text-6xl md:text-8xl" className="px-6 py-4 md:px-12 md:py-7 shadow-2xl hover:scale-105 transition-transform duration-700" />
         </div>
-        <h1 className="text-white text-4xl md:text-7xl serif mb-8 tracking-tighter leading-[1.1] text-balance">ARCHITECTING INEVITABLE <br /> BRAND AUTHORITY</h1>
-        <p className="text-white text-lg md:text-xl font-light max-w-2xl mx-auto mb-12 opacity-90 leading-relaxed italic">
-          We curate elegant narratives and timeless aesthetics, bridging the gap between high-vibrational vision and strategic commercial performance.
+        <h1 className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl serif mb-6 md:mb-7 tracking-tighter leading-tight text-balance">
+          Brand Foundations and Growth Systems for Wellness & Lifestyle Founders
+        </h1>
+        <p className="text-white text-base md:text-lg font-light max-w-3xl mx-auto mb-3 opacity-90 leading-relaxed serif italic">
+          FORM is a brand and growth consultancy for wellness, beauty, and lifestyle founders.
+          We help you clarify your brand, express it with confidence, and build systems that support sustainable, intentional growth.
+        </p>
+        <p className="text-white text-xs md:text-sm font-light max-w-2xl mx-auto mb-10 md:mb-12 opacity-70 serif italic">
+          Designed for founders who value aesthetics, clarity, and long-term success.
         </p>
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
           <Link to="/about" className="bg-white text-black px-12 py-4 font-bold uppercase tracking-widest text-[11px] transition-all hover:scale-105 shadow-xl">About Us</Link>
@@ -178,6 +184,12 @@ const PortfolioSection: React.FC = () => (
         <div>
           <span className="uppercase tracking-[0.4em] text-[10px] font-bold text-[#4a0000] mb-4 block">Our Clients</span>
           <h2 className="text-5xl md:text-6xl serif italic">Selected Worlds</h2>
+          <p className="text-[10px] uppercase tracking-widest text-[#4a0000] font-medium opacity-60 italic mt-4">
+            The spaces, brands, and founders we work with.
+          </p>
+          <p className="text-[10px] uppercase tracking-widest text-[#4a0000] font-medium opacity-60 italic mt-3 max-w-xl">
+            Experience-led brands in wellness, beauty, and lifestyle.
+          </p>
         </div>
         <Link to="/case-studies" className="bg-[#4a0000] text-white px-8 py-3 text-[10px] font-bold uppercase tracking-[0.3em] transition-all hover:scale-105 shadow-lg mt-8 md:mt-0">View Full Case Studies</Link>
       </div>
@@ -192,6 +204,9 @@ const PortfolioSection: React.FC = () => (
           </div>
         ))}
       </div>
+      <p className="text-[10px] uppercase tracking-widest text-[#4a0000] font-medium opacity-60 italic mt-10 max-w-2xl">
+        If your brand is built around experience, atmosphere, and trust — you’re in the right place.
+      </p>
     </div>
   </section>
 );
@@ -201,7 +216,10 @@ const ServicesSection: React.FC = () => (
     <div className="max-w-7xl mx-auto">
       <div className="text-center mb-20">
         <span className="uppercase tracking-[0.5em] text-[10px] font-bold text-[#4a0000] mb-4 block">Our Offering</span>
-        <h2 className="text-6xl serif mb-8 italic">Strategic Solutions</h2>
+        <h2 className="text-6xl serif mb-4 italic">Strategic Solutions</h2>
+        <p className="text-sm serif italic text-[#4a0000] opacity-70 leading-relaxed max-w-2xl mx-auto">
+          Intentional support for brands ready to grow with clarity.
+        </p>
       </div>
       <div className="grid lg:grid-cols-3 gap-0 border border-gray-100">
         {SERVICES.map((service, idx) => (
@@ -219,6 +237,9 @@ const ServicesSection: React.FC = () => (
           </div>
         ))}
       </div>
+      <p className="text-sm serif italic text-[#4a0000] opacity-70 leading-relaxed max-w-3xl mx-auto text-center mt-8">
+        FORM doesn’t focus on doing more — we focus on doing what matters.
+      </p>
     </div>
   </section>
 );
@@ -228,7 +249,7 @@ const PricingSection: React.FC = () => (
     <div className="max-w-7xl mx-auto">
       <div className="text-center mb-16">
         <h2 className="text-5xl serif mb-4 italic">Strategic Investment</h2>
-        <p className="uppercase tracking-[0.3em] text-[10px] font-bold text-[#4a0000]">Options for Impact & Expansion</p>
+        <p className="uppercase tracking-[0.3em] text-[10px] font-bold text-[#4a0000]">Options for clarity, impact & expansion</p>
       </div>
       <div className="grid lg:grid-cols-2 gap-12">
         {PRICING.map((tier, idx) => (
@@ -247,10 +268,16 @@ const PricingSection: React.FC = () => (
                   </li>
                 ))}
               </ul>
+              <p className="text-sm opacity-80 italic mt-8">
+                {tier.supportingLine}
+              </p>
             </div>
           </div>
         ))}
       </div>
+      <p className="text-sm opacity-80 italic max-w-2xl mx-auto text-center mt-8">
+        Each engagement is intentionally scoped to support your brand’s current stage.
+      </p>
     </div>
   </section>
 );
@@ -378,14 +405,12 @@ const CaseStudyPage: React.FC = () => (
 );
 
 const AboutPage: React.FC = () => {
-  const bioParts = TEAM[0].bio.split('\n\n');
-
   return (
     <section className="bg-[#4a0000] min-h-screen text-white">
       {/* 1. Page Header */}
-      <div className="pt-48 pb-24 px-6 border-b border-white/10 text-center">
-        <p className="uppercase tracking-[0.6em] text-[9px] font-bold opacity-40 mb-4">Founder-led. Strategically driven.</p>
-        <h1 className="text-7xl md:text-[10rem] serif italic tracking-tighter leading-none mb-4">About Us</h1>
+      <div className="pt-32 pb-16 px-6 border-b border-white/10 text-center">
+        <h1 className="text-6xl md:text-7xl serif italic tracking-tighter leading-none mb-4">Building Brands for the New Generation of Founders</h1>
+        <p className="uppercase tracking-[0.6em] text-[9px] font-bold opacity-40 mt-4">Founder-led. Strategically driven.</p>
       </div>
 
       {/* 2. Intro Block */}
@@ -393,13 +418,13 @@ const AboutPage: React.FC = () => {
         <div className="grid lg:grid-cols-2 gap-32 items-center mb-48">
           <div>
             <span className="uppercase tracking-[0.4em] text-[10px] font-bold mb-8 block text-[#cc3333]">The Agency Ethos</span>
-            <h2 className="text-5xl md:text-6xl serif italic leading-tight mb-8">Architecting <br />Digital Sovereignty.</h2>
+            <h2 className="text-5xl md:text-6xl serif italic leading-tight mb-8">Clarity Is the Foundation of Authority.</h2>
             <div className="space-y-6 text-lg font-light opacity-80 leading-relaxed max-w-lg">
               <p>
-                FORM is a boutique creative growth studio for visionaries of aesthetic wellness. We bridge the gap between high-vibrational artistry and precise commercial performance.
+                FORM partners with wellness and lifestyle founders to define their positioning, refine their message, and build a visual identity that feels clear and confident.
               </p>
               <p>
-                We specialize in the "quiet luxury" of brand building—architecting spaces of immense beauty where authority becomes an inevitable byproduct.
+                We focus on the details that shape trust, tone, structure, and experience - so the brand feels aligned from the first touchpoint to the moment someone chooses to work with you.
               </p>
             </div>
           </div>
@@ -414,7 +439,39 @@ const AboutPage: React.FC = () => {
           </div>
         </div>
 
-        {/* 3. The Three Pillars */}
+        {/* 3. Leadership Section */}
+        <div className="grid lg:grid-cols-2 gap-24 items-start">
+          <div className="relative">
+            <div className="aspect-[3/4] overflow-hidden shadow-2xl relative z-10 bg-black/20">
+              <img src={FounderPhoto} alt="Tamyra Simpson" className="w-full h-full object-cover object-top" />
+            </div>
+            <div className="absolute -top-10 -left-10 w-full h-full border border-white/20 z-0"></div>
+          </div>
+          <div>
+            <span className="uppercase tracking-[0.4em] text-[10px] font-bold mb-6 md:mb-8 block opacity-40">The Visionary</span>
+            <h2 className="text-5xl md:text-6xl serif mb-6 md:mb-10 leading-tight">Directed by <br />Tamyra Simpson.</h2>
+            <div className="space-y-8 md:space-y-12">
+              <p className="text-2xl font-light opacity-90 leading-relaxed italic border-l-2 border-[#cc3333] pl-8">
+                "I believe the brands we build should feel as considered as the lives we're creating."
+              </p>
+              <p className="text-lg font-light opacity-70 leading-relaxed">
+                Tamyra Simpson is the Founder and Creative Director of FORM - a brand and growth consultancy shaped by her deep appreciation for wellness, self-care, and thoughtfully designed experiences.
+              </p>
+              <p className="text-lg font-light opacity-70 leading-relaxed">
+                Her approach to brand building is informed by how she lives: intentionally, with care, and with a high standard for the environments she chooses. From wellness studios and hospitality spaces to global travel and everyday rituals, Tamyra believes that how something feels is just as important as how it functions.
+              </p>
+              <p className="text-lg font-light opacity-70 leading-relaxed">
+                Years of travel and immersion in elevated, experience-led spaces have refined her eye for detail, atmosphere, and restraint shaping a belief that true luxury is quiet, aligned, and deeply intentional. This perspective guides every FORM engagement, ensuring brands are not only visually refined, but emotionally resonant and built to last.
+              </p>
+              <p className="text-lg font-light opacity-70 leading-relaxed">
+                Tamyra works closely with founders who value experience, integrity, and long-term vision - guiding them to build brands that feel grounded, elevated, and true to who they are.
+              </p>
+              <Link to="/case-studies" className="inline-block text-[10px] font-bold uppercase tracking-[0.4em] border-b border-white/40 pb-1 hover:border-white transition-all">View the Work</Link>
+            </div>
+          </div>
+        </div>
+
+        {/* 4. The Three Pillars */}
         <div className="grid md:grid-cols-3 gap-16 mb-48 border-y border-white/10 py-24 bg-white/5 backdrop-blur-sm -mx-6 px-12">
           <div>
             <h3 className="text-xs uppercase tracking-[0.3em] font-bold text-[#cc3333] mb-6">Aesthetic Precision</h3>
@@ -433,29 +490,6 @@ const AboutPage: React.FC = () => {
             <p className="text-sm opacity-60 leading-relaxed italic font-light">
               Growth is intentional, prioritizing relationship quality over mindless scaling volume.
             </p>
-          </div>
-        </div>
-
-        {/* 4. Leadership Section */}
-        <div className="grid lg:grid-cols-2 gap-24 items-start">
-          <div className="relative">
-            <div className="aspect-[3/4] overflow-hidden shadow-2xl relative z-10 bg-black/20">
-              <img src={FounderPhoto} alt="Tamyra Simpson" className="w-full h-full object-cover object-top" />
-            </div>
-            <div className="absolute -top-10 -left-10 w-full h-full border border-white/20 z-0"></div>
-          </div>
-          <div>
-            <span className="uppercase tracking-[0.4em] text-[10px] font-bold mb-8 block opacity-40">The Visionary</span>
-            <h2 className="text-5xl md:text-6xl serif mb-10 leading-tight">Directed by <br />Tamyra Simpson.</h2>
-            <div className="space-y-12">
-              <p className="text-2xl font-light opacity-90 leading-relaxed italic border-l-2 border-[#cc3333] pl-8">
-                "{bioParts[0]}"
-              </p>
-              <p className="text-lg font-light opacity-70 leading-relaxed">
-                {bioParts[1]}
-              </p>
-              <Link to="/case-studies" className="inline-block text-[10px] font-bold uppercase tracking-[0.4em] border-b border-white/40 pb-1 hover:border-white transition-all">View the Work</Link>
-            </div>
           </div>
         </div>
       </div>

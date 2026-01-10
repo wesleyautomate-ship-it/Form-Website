@@ -12,6 +12,7 @@ export interface PricingTier {
   growth: string;
   premium: string;
   features: string[];
+  supportingLine: string;
 }
 
 export interface CaseStudy {

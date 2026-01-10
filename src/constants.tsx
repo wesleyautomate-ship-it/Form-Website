@@ -4,22 +4,22 @@ import { ServiceItem, PricingTier, TeamMember, CaseStudy, BusinessPillar } from 
 export const PILLARS: BusinessPillar[] = [
   {
     title: "Brand Environments",
-    tagline: "Atmosphere as strategy.",
+    tagline: "Spaces designed to be felt, not just seen.",
     image: "/assets/enviroment.jpeg"
   },
   {
     title: "Lifestyle & Culture",
-    tagline: "Brands live where people move.",
+    tagline: "Brands that live naturally in everyday life.",
     image: "/assets/lifestyle.jpeg"
   },
   {
     title: "Product & Detail",
-    tagline: "Designed objects, placed with intention.",
+    tagline: "Intentional products, presented with care.",
     image: "/assets/product-detail.jpeg"
   },
   {
     title: "Wellness & Movement",
-    tagline: "Modern wellness as a brand language.",
+    tagline: "Wellness experiences expressed through brand.",
     image: "/assets/wellness-photo.jpeg"
   }
 ];
@@ -83,29 +83,29 @@ export const CASE_STUDIES: CaseStudy[] = [
 export const SERVICES: ServiceItem[] = [
   {
     id: 1,
-    title: "Visual Sovereignty",
+    title: "Brand Foundations",
     items: [
-      "Signature Brand Identity & Market Positioning",
-      "Design Systems & Visual Standards",
-      "Boutique Commerce Architecture"
+      "Brand positioning and identity direction",
+      "Visual systems and brand standards",
+      "Digital and commerce foundations"
     ]
   },
   {
     id: 2,
-    title: "Community Ecosystems",
+    title: "Growth & Communication Systems",
     items: [
-      "Retention-Focused Communication Flows",
-      "Community-Centric Growth Frameworks",
-      "High-Vibration Content Production"
+      "Customer communication flows",
+      "Community-led growth strategies",
+      "Content systems that build trust"
     ]
   },
   {
     id: 3,
-    title: "Strategic Direction",
+    title: "Strategic Guidance",
     items: [
-      "Brand Integrity Audits",
-      "Offer Refinement & Value Design",
-      "Go-to-Market Strategy"
+      "Brand and offer clarity",
+      "Go-to-market and launch planning",
+      "Decision-making support for founders"
     ]
   }
 ];
@@ -113,19 +113,33 @@ export const SERVICES: ServiceItem[] = [
 export const PRICING: PricingTier[] = [
   {
     name: "The Identity Foundation",
-    description: "Establishing visual authority for emerging founders.",
+    description: "Clarifying your brand and establishing a confident foundation.",
     startup: "",
     growth: "",
     premium: "",
-    features: ["Core Value Architecture", "Brand Narrative", "Visual Identity System", "Creative Direction", "Tactical Execution Roadmap"]
+    features: [
+      "Core value architecture",
+      "Creative direction",
+      "Brand positioning & narrative",
+      "Tactical execution roadmap",
+      "Visual identity system"
+    ],
+    supportingLine: "Ideal for founders seeking clarity, confidence, and consistency."
   },
   {
     name: "The Digital Flagship",
-    description: "A high-performance commerce destination designed for desirability.",
+    description: "A refined digital presence designed to convert and scale.",
     startup: "",
     growth: "",
     premium: "",
-    features: ["End-to-End Commerce Build", "Search Authority Optimization", "Responsive Experience Design", "High-Conversion Styling", "Seamless Transactional Flow"]
+    features: [
+      "End-to-end website & commerce build",
+      "Search visibility optimization",
+      "Responsive experience design",
+      "Conversion-focused styling",
+      "Seamless transactional flow"
+    ],
+    supportingLine: "Designed for brands ready to grow through their digital presence."
   }
 ];
 

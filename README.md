@@ -15,6 +15,10 @@ View your app in AI Studio: https://ai.studio/apps/drive/190jCagEi3ffLpxOMYyAIHQ
 
 1. Install dependencies:
    `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+2. Create `.env.local` (see `.env.local.example` for the full list).
+   - Required for the AI assistant: `GEMINI_API_KEY`
+   - Required for live form automation: `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `RESEND_API_KEY`
+   - Optional: `ADMIN_EMAIL`, `RESEND_FROM`
+   - By default the form endpoint is mocked; set `VITE_USE_MOCK_API=false` to use live email + database automation locally.
 3. Run the app:
    `npm run dev`
