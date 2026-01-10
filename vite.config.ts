@@ -3,12 +3,14 @@ import { Buffer } from 'node:buffer';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
+import { ChatError, handleChatRequest } from './api/chat-handler';
 import { FormError, handleSubmitForm } from './api/submit-form-handler';
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, '.', '');
   Object.assign(process.env, env);
   const useMockApi = env.VITE_USE_MOCK_API?.toLowerCase() !== 'false';
+  const geminiKey = env.GEMINI_API_KEY || process.env.GEMINI_API_KEY || process.env.API_KEY || '';
 
   const sendJson = (res: ServerResponse, status: number, body: unknown) => {
     res.statusCode = status;
@@ -51,7 +53,10 @@ export default defineConfig(({ mode }) => {
             }
 
             const url = new URL(req.url, 'http://localhost');
-            if (url.pathname !== '/api/submit-form') {
+            const isSubmitForm = url.pathname === '/api/submit-form';
+            const isChat = url.pathname === '/api/chat';
+
+            if (!isSubmitForm && !isChat) {
               next();
               return;
             }
@@ -62,9 +67,16 @@ export default defineConfig(({ mode }) => {
             }
 
             if (useMockApi) {
+              if (isSubmitForm) {
+                sendJson(res, 200, {
+                  success: true,
+                  message: 'Form submitted successfully (MOCK)',
+                });
+                return;
+              }
+
               sendJson(res, 200, {
-                success: true,
-                message: 'Form submitted successfully (MOCK)',
+                reply: "Thanks for reaching out. FORM's team will follow up shortly.",
               });
               return;
             }
@@ -77,17 +89,33 @@ export default defineConfig(({ mode }) => {
               return;
             }
 
+            if (isSubmitForm) {
+              try {
+                const result = await handleSubmitForm(body);
+                sendJson(res, 200, {
+                  success: true,
+                  message: 'Form submitted successfully',
+                  leadId: result.leadId,
+                });
+              } catch (error) {
+                const status = error instanceof FormError ? error.status : 500;
+                sendJson(res, status, {
+                  error: 'Failed to process form submission',
+                  details: error instanceof Error ? error.message : 'Unknown error',
+                });
+              }
+              return;
+            }
+
             try {
-              const result = await handleSubmitForm(body);
+              const result = await handleChatRequest(body);
               sendJson(res, 200, {
-                success: true,
-                message: 'Form submitted successfully',
-                leadId: result.leadId,
+                reply: result.reply,
               });
             } catch (error) {
-              const status = error instanceof FormError ? error.status : 500;
+              const status = error instanceof ChatError ? error.status : 500;
               sendJson(res, status, {
-                error: 'Failed to process form submission',
+                error: 'Failed to generate response',
                 details: error instanceof Error ? error.message : 'Unknown error',
               });
             }
@@ -96,8 +124,8 @@ export default defineConfig(({ mode }) => {
       }
     ],
     define: {
-      'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
-      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY)
+      'process.env.API_KEY': JSON.stringify(geminiKey),
+      'process.env.GEMINI_API_KEY': JSON.stringify(geminiKey)
     },
     resolve: {
       alias: {
