@@ -37,26 +37,54 @@ const Logo: React.FC<{ className?: string, textSize?: string }> = ({ className =
   </div>
 );
 
-const Header: React.FC = () => (
-  <header className="sticky top-0 z-40 bg-[#4a0000] border-b border-white/10 backdrop-blur-md bg-opacity-95">
-    <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-      <Link to="/" className="hover:opacity-90 transition-opacity">
-        <Logo textSize="text-3xl" />
-      </Link>
-      <nav className="hidden md:flex space-x-8 text-white uppercase tracking-[0.2em] text-[10px] font-bold">
-        <Link to="/" className="hover:text-gray-300 transition-colors">HOME</Link>
-        <Link to="/about" className="hover:text-gray-300 transition-colors">ABOUT US</Link>
-        <Link to="/case-studies" className="hover:text-gray-300 transition-colors">CASE STUDY</Link>
-      </nav>
-      <Link
-        to="/#booking"
-        className="bg-white text-black px-6 py-2 text-[10px] font-bold uppercase tracking-widest transition-all duration-200 hover:bg-gray-200 hover:scale-105 active:scale-95"
-      >
-        Inquire
-      </Link>
-    </div>
-  </header>
-);
+const Header: React.FC = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => setIsMenuOpen((open) => !open);
+  const closeMenu = () => setIsMenuOpen(false);
+
+  return (
+    <header className="sticky top-0 z-40 bg-[#4a0000] border-b border-white/10 backdrop-blur-md bg-opacity-95">
+      <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <Link to="/" className="hover:opacity-90 transition-opacity" onClick={closeMenu}>
+          <Logo textSize="text-3xl" />
+        </Link>
+        <nav className="hidden md:flex space-x-8 text-white uppercase tracking-[0.2em] text-[10px] font-bold">
+          <Link to="/" className="hover:text-gray-300 transition-colors">HOME</Link>
+          <Link to="/about" className="hover:text-gray-300 transition-colors">ABOUT US</Link>
+          <Link to="/case-studies" className="hover:text-gray-300 transition-colors">CASE STUDY</Link>
+        </nav>
+        <div className="flex items-center gap-4">
+          <button
+            type="button"
+            onClick={toggleMenu}
+            className="md:hidden text-white hover:text-gray-300 transition-colors active:scale-95"
+            aria-label="Toggle navigation"
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-nav"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+          <Link
+            to="/#booking"
+            className="bg-white text-black px-6 py-2 text-[10px] font-bold uppercase tracking-widest transition-all duration-200 hover:bg-gray-200 hover:scale-105 active:scale-95"
+          >
+            Inquire
+          </Link>
+        </div>
+      </div>
+      <div className={`md:hidden border-t border-white/10 bg-[#4a0000]/95 backdrop-blur-md ${isMenuOpen ? 'block' : 'hidden'}`}>
+        <nav id="mobile-nav" className="px-6 py-4 flex flex-col gap-4 text-white uppercase tracking-[0.2em] text-[10px] font-bold">
+          <Link to="/" className="hover:text-gray-300 transition-colors" onClick={closeMenu}>HOME</Link>
+          <Link to="/about" className="hover:text-gray-300 transition-colors" onClick={closeMenu}>ABOUT US</Link>
+          <Link to="/case-studies" className="hover:text-gray-300 transition-colors" onClick={closeMenu}>CASE STUDY</Link>
+        </nav>
+      </div>
+    </header>
+  );
+};
 
 const Hero: React.FC = () => {
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
