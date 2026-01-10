@@ -69,7 +69,7 @@ const Header: React.FC = () => {
           </button>
           <Link
             to="/#booking"
-            className="bg-white text-black px-6 py-2 text-[10px] font-bold uppercase tracking-widest transition-all duration-200 hover:bg-gray-200 hover:scale-105 active:scale-95"
+            className="hidden md:inline-flex bg-white text-black px-6 py-2 text-[10px] font-bold uppercase tracking-widest transition-all duration-200 hover:bg-gray-200 hover:scale-105 active:scale-95"
           >
             Inquire
           </Link>
@@ -79,7 +79,16 @@ const Header: React.FC = () => {
         <nav id="mobile-nav" className="px-6 py-4 flex flex-col gap-4 text-white uppercase tracking-[0.2em] text-[10px] font-bold">
           <Link to="/" className="hover:text-gray-300 transition-colors" onClick={closeMenu}>HOME</Link>
           <Link to="/about" className="hover:text-gray-300 transition-colors" onClick={closeMenu}>ABOUT US</Link>
-          <Link to="/case-studies" className="hover:text-gray-300 transition-colors" onClick={closeMenu}>CASE STUDY</Link>
+          <div className="flex items-center justify-between w-full">
+            <Link to="/case-studies" className="hover:text-gray-300 transition-colors" onClick={closeMenu}>CASE STUDY</Link>
+            <Link
+              to="/#booking"
+              className="bg-white text-black px-4 py-2 text-[10px] font-bold uppercase tracking-widest transition-all duration-200 hover:bg-gray-200 active:scale-95"
+              onClick={closeMenu}
+            >
+              Inquire
+            </Link>
+          </div>
         </nav>
       </div>
     </header>
